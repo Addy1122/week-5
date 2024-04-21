@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+<body style="padding: 200px;">
+    <button id="fetchdata" onclick="getData()" style="width: 200px; padding:10px; background-color: green;color:white">Generate Random Activity</button>
+    <div id="result" style="display: none;">
+        <h1 id="title"></h1>
+        <p>Type: <span id="type"></span></p>
+        <p>Participants: <span id="participants"></span></p>
+        <p>Price: <span id="price"></span></p>
+        <p>Link: <span id="link"></span></p>
+        <p>Key: <span id="key"></span></p>
+    </div>
+</body>
+<script>
+  const fetchDataBtn = document.querySelector('#fetchdata')
+  const result = document.querySelector('#result')
+  
+  // gets data from API and sets the content of #result div
+  const getData = function() {
+    //result.innerText = 'Loading....'
+    fetch('https://www.boredapi.com/api/activity')
+      .then(res => res.json())
+      .then(data => {
+      //   result.innerText = JSON.stringify(data, null, 2)
+        result.style.display="block";
+        document.getElementById('title').innerText = data.activity;
+        document.getElementById('type').innerText = data.type;
+        document.getElementById('participants').innerText = data.participants;
+        document.getElementById('price').innerText = data.price;
+        document.getElementById('link').innerText = data.link;
+        document.getElementById('key').innerText = data.key;
+      })
+      .catch(error => console.log(error))
+  }
+  
+ // fetchDataBtn.addEventListener('click', getData)
+</script>
+
+</html>
